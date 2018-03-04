@@ -1,6 +1,7 @@
 buildscript {
     ext.kotlin_version = '1.2.30'
     ext.dropwizard_version = '1.2.4'
+    ext.jackson_version = '2.9.4.1'
     ext.junitJupiterVersion = '5.1.0'
 
     repositories {
@@ -25,7 +26,14 @@ repositories {
 
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
     api "io.dropwizard:dropwizard-core:$dropwizard_version"
+
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version") {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
+    }
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
@@ -43,10 +51,6 @@ compileTestKotlin {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId 'se.activout.kronslott'
-            artifactId 'object-mapper'
-            version '1.0'
-
             from components.java
         }
     }
