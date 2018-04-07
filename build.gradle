@@ -12,8 +12,8 @@ buildscript {
     }
 }
 
-group 'se.activout.kronslott'
-version '1.0-SNAPSHOT'
+group = 'se.activout.kronslott'
+version = '1.0-SNAPSHOT'
 
 apply plugin: 'kotlin'
 apply plugin: 'java-library'
